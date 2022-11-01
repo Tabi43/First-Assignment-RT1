@@ -10,7 +10,8 @@ To kown the corrects distance during its job, the robot measure and save any blo
 
 ## Pseudocode
 
-discover()
+```
+discover(silver_list :list(), gold_list : list())
         do the robot revolves around itself
         markers = markers seen by robot at that time
         for each markers
@@ -19,20 +20,25 @@ discover()
                 distance <- marker distance from the robot
                 rotation <- marker rotation relative to the robot
                 if (NOT gold_marker_list.contains(code)) AND color = 'gold' then
-                        token = (code, distance, rotation)
+                        token <- (code, distance, rotation)
                         gold_marker_list.add(token)
                 if (NOT silver_marker_list.contains(code)) AND color = 'silver' then
-                        token = (code, distance, rotation)
+                        token <- (code, distance, rotation)
                         silver_marker_list.add(token)
 
 chose_closest_token(color_marker_list: list()): (int, int)
         min_dst <- 0
+        rotation <- 0
         for each markers in color_marker_list
                 if (marker.distance < min_dts OR min_dst = 0) Then
                         choose that marker
                         min_dst <- marker.distance
-        return marker.code, 
-              
+                         rotation <- marker rotation relative to the robot
+        return marker.code, rotation  
+
+update_distance(list :list(), m :marker)
+        
+```          
               
               
         
