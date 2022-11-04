@@ -94,11 +94,22 @@ reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int)
                                                 else
                                                         update_distance(silver_tokens, m)
                                                 
+gold_tokens <- list()
+silver_tokens <- list()
+discover(silver_tokens, gold_tokens)
+while(len(gold_tokens) + len(silver_tokens) > 0)
+	get code and last_rot_y from chose_closer_token(silver_tokens)
+	reach_block_code(code, "silver-token" , last_rot_y, d_th)
+	grab the block
+	disable_token(silver_tokens, code)
+	get code and last_rot_y from chose_closer_token(gold_tokens)
+	reach_block_code(code, "gold-token" , last_rot_y, 1.5*d_th)
+	release the block
+	disable_token(gold_tokens, code)	
+	go back for a while 
         
-        
-        
-        
-```          
-              
-              
+```
+Possible Improvement
+----------------------
+A possible improvement could be the implementation of record new blocks during the job.        
         
