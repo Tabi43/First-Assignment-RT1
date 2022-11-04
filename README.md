@@ -13,7 +13,7 @@ To kown the corrects distance during its job, the robot measure and save any blo
 ```
 discover(silver_list :list(), gold_list : list())
         do the robot revolves around itself
-        markers = markers seen by robot at that time
+        markers <- markers seen by robot at that time
         for each markers
                 code <- marker code
                 color <- markers color 
@@ -37,6 +37,66 @@ chose_closest_token(color_marker_list: list()): (int, int)
         return marker.code, rotation  
 
 update_distance(list :list(), m :marker)
+        int i <- contains(list, m)
+        if( i != -1) Then
+                list(i).dist <- m.dist
+                list(i).rot_y <- m.rot_y
+
+disable_token(list :list(), code :int)
+        int i <- contains(list, m)
+        list.removeAt(i)
+
+contains(list :list(), code :int) :int 
+        int i <- 0
+        foreach marker in list
+                i <- i + 1
+                if(marker.code == code) Then
+                        return i
+        return -1
+        
+reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int)
+        int dst <- 0
+        int rot_y <- 0
+        while(dst == 0)
+                if(last_rot_y < -a_th) Then
+                        turn left
+                ELse 
+                        turn right
+                if(last_rot_y == 0)
+                        turn right
+                markers <- markers seen by robot at that time
+                foreach marker in markers
+                        if(marker.info.code == code AND m.info.type == type) Then
+                                dist <- m.dist
+                                rot_y <- m.rot_y
+                        if(marker.info.type == "gold-token") Then
+                                update_distance(gold_tokens, m)
+                        else
+                                update_distance(silver_tokens, m)
+        foreach marker in markers 
+                if(marker.info.code == code AND m.info.type == type) Then
+                        dist <- m.dist
+                        rot_y <- m.rot_y
+                        while(dist < m_dst)
+                                if(-a_th<= rot_y <= a_th) Then
+                                        go straight
+                                else if(rot_y < -a_th) Then
+                                        turn left
+                                else
+                                        turn right
+                                markers <- markers seen by robot at that time
+                                        if(marker.info.code == code AND m.info.type == type) Then
+                                                rot_y = m.rot_y	
+						dist = m.dist	
+                                        else
+                                                if(marker.info.type == "gold-token") Then
+                                                        update_distance(gold_tokens, m)
+                                                else
+                                                        update_distance(silver_tokens, m)
+                                                
+        
+        
+        
         
 ```          
               
