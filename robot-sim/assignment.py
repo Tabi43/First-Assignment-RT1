@@ -4,8 +4,6 @@ import time
 import os
 from sr.robot import *
 
-#silver-token and gold-token are the types of blocks!
-
 R = Robot()
 
 a_th = 2.0 
@@ -41,7 +39,7 @@ def turn(speed, seconds):
 def discover(silver_list, gold_list):
 	"""
 		Function that make the robot turn around 
-		to search and measure all tokens he see
+		to search and measure all tokens it see
 	"""
 	print("Analizing the map...")
 	i = 12 #12 is a good number to make it turn a complete round
@@ -117,7 +115,7 @@ def contains(list, code):
 	return -1
 
 
-def reach_block_code(code, type, last_rot_y, m_dst):
+def reach_block_code(code, type, last_rot_y, m_dst, silver_list, gold_list):
 	"""
 	Function for reach a particular token
 	
@@ -144,9 +142,9 @@ def reach_block_code(code, type, last_rot_y, m_dst):
 				dist = m.dist
 				print("I can see it now!")
 			if(m.info.marker_type == "gold-token"):
-				update_distance(gold_tokens, m)
+				update_distance(gold_list, m)
 			else:
-				update_distance(silver_tokens, m)
+				update_distance(silver_list, m)
 	for m in markers:
 		if(m.info.code == code and m.info.marker_type == type):
 			rot_y = m.rot_y
@@ -169,9 +167,9 @@ def reach_block_code(code, type, last_rot_y, m_dst):
 						dist = m.dist				
 					else:
 						if(m.info.marker_type == "gold-token"):
-							update_distance(gold_tokens, m)
+							update_distance(gold_list, m)
 						else:
-							update_distance(silver_tokens, m)					
+							update_distance(silver_list, m)					
 							
 
 """
@@ -193,11 +191,11 @@ n = discover(silver_tokens, gold_tokens)
 print("Discovered : ", n, "elements")
 while(len(gold_tokens) + len(silver_tokens) > 0):
 	code, last_rot_y = chose_closer_token(silver_tokens)
-	reach_block_code(code, "silver-token" , last_rot_y, d_th)
+	reach_block_code(code, "silver-token" , last_rot_y, d_th, silver_tokens, gold_tokens)
 	R.grab()
 	disable_token(silver_tokens, code)
 	code, last_rot_y = chose_closer_token(gold_tokens)
-	reach_block_code(code, "gold-token" , last_rot_y, 1.5*d_th)
+	reach_block_code(code, "gold-token" , last_rot_y, 1.5*d_th, silver_tokens, gold_tokens)
 	R.release()
 	disable_token(gold_tokens, code)	
 	drive(-10,1)
