@@ -11,10 +11,10 @@ d_th = 0.4
 
 def drive(speed, seconds):
     """
-    Function for setting a linear velocity
+    		Function for setting a linear velocity
     
-    Args: speed (int): the speed of the wheels
-	  seconds (int): the time interval
+    		Args: 	speed (int): the speed of the wheels
+	  		seconds (int): the time interval
     """
     R.motors[0].m0.power = speed
     R.motors[0].m1.power = speed
@@ -24,10 +24,10 @@ def drive(speed, seconds):
 
 def turn(speed, seconds):
     """
-    Function for setting an angular velocity
+    		Function for setting an angular velocity
     
-    Args: speed (int): the speed of the wheels
-	  seconds (int): the time interval
+    		Args: 	speed (int): the speed of the wheels
+	 		seconds (int): the time interval
     """
     R.motors[0].m0.power = speed
     R.motors[0].m1.power = -speed
@@ -40,6 +40,9 @@ def discover(silver_list, gold_list):
 	"""
 		Function that make the robot turn around 
 		to search and measure all tokens it see
+		
+		Args: 	silver_list (list())  is the memory vector of the type silver
+			gold_list (list())  is the memory vector of the type gold
 	"""
 	print("Analizing the map...")
 	i = 12 #12 is a good number to make it turn a complete round
@@ -61,7 +64,7 @@ def chose_closer_token(list):
 	"""
 		He search into his memory the closer token.
 		
-		Args: list (...) is the memory vector of the type needed
+		Args: 	list (...) is the memory vector of the type needed
 	"""
 	i = 0
 	min_d = 0
@@ -117,12 +120,14 @@ def contains(list, code):
 
 def reach_block_code(code, type, last_rot_y, m_dst, silver_list, gold_list):
 	"""
-	Function for reach a particular token
+		Function for reach a particular token
 	
-	Args: 	code (int) Code of the token to reach
-		type (string) Type of the token to reach
-		last_rot_y (double) The last rotation useful to turn in the right sense
-		m_dst (double) The minimum distance to consider the token reached
+		Args: 	code (int) Code of the token to reach
+			type (string) Type of the token to reach
+			last_rot_y (double) The last rotation useful to turn in the right sense
+			m_dst (double) The minimum distance to consider the token reached
+			silver_list (list())  is the memory vector of the type silver
+			gold_list (list())  is the memory vector of the type gold
 		
 	"""
 	print("Going to reach the token with code :", code)	
