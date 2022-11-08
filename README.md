@@ -1,7 +1,7 @@
 First Assignment of Research Track I
 ================================
 
-This is my solution of the first Reaserach Track's Assignment. I tried to obtain a general high effincency solution for this job, in fact the idea is to search and choose the closest silver box in the enviroment, then it must put that block close to the closest golden box. Having at the end the boxes distributed in pairs.
+This solution of the first Reaserach Track's Assignment try to be a general high effincency solution. The idea is to search and choose the closest silver box in the enviroment, then the robot put that block close to the closest golden box to it. Getting the boxes distributed in pairs at the end.
 
 Installing and running
 ----------------------
@@ -17,8 +17,8 @@ $ python2 run.py assignment.py
 
 How works
 ----------------------
-At the start the robot revolves around itself to search, mesaure and save every block he can see. Then it choose the closest silver box and go to reach it. After reached the closest silver box, it grabs it and go to reach the closest gold one to pair them. 
-To kown the corrects distance during its job, the robot measure and save any block it see while moving around the map. 
+At the start the robot revolves around itself to search, mesaure and save every block he can see. Then it choose the closest silver box and go to reach it. After reached the closest silver box, the robot grabs the block and go to reach the closest gold one to pair them. 
+To kown the correct distance during its job, the robot measure and save any block it see while moving around the map. 
 
 ## Pseudocode
 
@@ -66,7 +66,7 @@ contains(list :list(), code :int) :int
                         return i
         return -1
         
-reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int)
+reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int,silver_list :list(), gold_list : list())
         int dst <- 0
         int rot_y <- 0
         while(dst == 0)
@@ -82,9 +82,9 @@ reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int)
                                 dist <- m.dist
                                 rot_y <- m.rot_y
                         if(marker.info.type == "gold-token") Then
-                                update_distance(gold_tokens, m)
+                                update_distance(gold_list, m)
                         else
-                                update_distance(silver_tokens, m)
+                                update_distance(silver_list, m)
         foreach marker in markers 
                 if(marker.info.code == code AND m.info.type == type) Then
                         dist <- m.dist
@@ -102,20 +102,20 @@ reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int)
 						dist = m.dist	
                                         else
                                                 if(marker.info.type == "gold-token") Then
-                                                        update_distance(gold_tokens, m)
+                                                        update_distance(gold_list, m)
                                                 else
-                                                        update_distance(silver_tokens, m)
+                                                        update_distance(silver_list, m)
                                                 
 gold_tokens <- list()
 silver_tokens <- list()
 discover(silver_tokens, gold_tokens)
 while(len(gold_tokens) + len(silver_tokens) > 0)
 	get code and last_rot_y from chose_closer_token(silver_tokens)
-	reach_block_code(code, "silver-token" , last_rot_y, d_th)
+	reach_block_code(code, "silver-token" , last_rot_y, d_th, silver_tokens, gold_tokens)
 	grab the block
 	disable_token(silver_tokens, code)
 	get code and last_rot_y from chose_closer_token(gold_tokens)
-	reach_block_code(code, "gold-token" , last_rot_y, 1.5*d_th)
+	reach_block_code(code, "gold-token" , last_rot_y, 1.5*d_th, silver_tokens, gold_tokens)
 	release the block
 	disable_token(gold_tokens, code)	
 	go back for a while 
