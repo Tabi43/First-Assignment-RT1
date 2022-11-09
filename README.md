@@ -1,7 +1,7 @@
 First Assignment of Research Track I
 ================================
 
-This solution of the first Reaserach Track's Assignment try to be a general high effincency solution. The idea is to search and choose the closest silver box in the enviroment, then the robot put that block close to the closest golden box to it. Getting the boxes distributed in pairs at the end.
+The idea is to search and choose the closest silver box in the enviroment, then the robot put that block close to the closest golden box to it. Getting the boxes distributed in pairs at the end.
 
 Installing and running
 ----------------------
