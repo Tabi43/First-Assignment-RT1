@@ -69,7 +69,7 @@ contains(list :list(), code :int) :int
 reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int,silver_list :list(), gold_list : list())
         int dst <- 0
         int rot_y <- 0
-        while(dst == 0)
+        while(dst = 0)
                 if(last_rot_y < -a_th) Then
                         turn left
                 ELse 
