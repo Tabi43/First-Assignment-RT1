@@ -62,7 +62,7 @@ contains(list :list(), code :int) :int
         int i <- 0
         foreach marker in list
                 i <- i + 1
-                if(marker.code == code) Then
+                if(marker.code = code) Then
                         return i
         return -1
         
@@ -74,34 +74,34 @@ reach_block_code(code :int, type :string, last_rot_y :int ,m_dst :int,silver_lis
                         turn left
                 ELse 
                         turn right
-                if(last_rot_y == 0)
+                if(last_rot_y = 0)
                         turn right
                 markers <- markers seen by robot at that time
                 foreach marker in markers
-                        if(marker.info.code == code AND m.info.type == type) Then
+                        if(marker.info.code = code AND m.info.type = type) Then
                                 dist <- m.dist
                                 rot_y <- m.rot_y
-                        if(marker.info.type == "gold-token") Then
+                        if(marker.info.type = "gold-token") Then
                                 update_distance(gold_list, m)
                         else
                                 update_distance(silver_list, m)
         foreach marker in markers 
-                if(marker.info.code == code AND m.info.type == type) Then
+                if(marker.info.code = code AND m.info.type = type) Then
                         dist <- m.dist
                         rot_y <- m.rot_y
                         while(dist < m_dst)
-                                if(-a_th<= rot_y <= a_th) Then
+                                if(-a_th <= rot_y <= a_th) Then
                                         go straight
                                 else if(rot_y < -a_th) Then
                                         turn left
                                 else
                                         turn right
                                 markers <- markers seen by robot at that time
-                                        if(marker.info.code == code AND m.info.type == type) Then
-                                                rot_y = m.rot_y	
-						dist = m.dist	
+                                        if(marker.info.code = code AND m.info.type = type) Then
+                                                rot_y <- m.rot_y	
+						dist <- m.dist	
                                         else
-                                                if(marker.info.type == "gold-token") Then
+                                                if(marker.info.type = "gold-token") Then
                                                         update_distance(gold_list, m)
                                                 else
                                                         update_distance(silver_list, m)
